@@ -12,11 +12,11 @@ describe("NFT1155", () => {
   before(async () => {
     [admin, alice, bob, random] = await ethers.getSigners();
     
-    const NFT1155 = await ethers.getContractFactory("NFT1155");
+    const NFT1155 = await ethers.getContractFactory("stockenCapital");
     nft1155 = await NFT1155.deploy("htttp://");
     await nft1155.deployed();
 
-    const NFT1155Art = artifacts.require("NFT1155");
+    const NFT1155Art = artifacts.require("stockenCapital");
     nft1155 = await NFT1155Art.at(nft1155.address);
 
   });
