@@ -22,7 +22,6 @@ contract stockenCapital is  ERC1155Burnable {
         uint256 idUser;
         Category category;
         bytes32 info;
-        bytes10 titulo;
     }
     enum Category {
         PARTICIPACIONSOCIAL,JUNTA,NOTACONVERTIBLE
@@ -39,7 +38,7 @@ contract stockenCapital is  ERC1155Burnable {
 
 
     //EVENTS
-    event newActivo(address creator, uint userId,bytes32 info, bytes10 titulo,Category category, uint id);
+    event newActivo(address creator, uint userId,bytes32 info,Category category, uint id);
     event burnNFT(address creator, uint id);
     event newDocumento(address _owner,uint[] _idUsers,uint _idDocument,bytes32 _hashDocument);
 
@@ -66,7 +65,7 @@ contract stockenCapital is  ERC1155Burnable {
     function getActivosByUser(uint256 _userId) public view returns (TokenData[] memory){
         return activosByUser[_userId];
     }
-     function getDocumentos(uint256 _documentoID) public view returns (Documento memory){
+     function getDocumento(uint256 _documentoID) public view returns (Documento memory){
         return documentos[_documentoID];
     }
     function getDocumentosByUser(uint256 _userId) public view returns (Documento[] memory){
@@ -75,10 +74,11 @@ contract stockenCapital is  ERC1155Burnable {
 
     
 
+    
     /**
      * @dev user creates new NFTs
      */
-    function createNewActivo(address _owner,uint _idUser, Category _category,bytes32 _info,bytes10  _titulo, string memory _ipfshash) public onlyOwner returns (uint){
+    function createNewActivo(address _owner,uint _idUser, Category _category,bytes32 _info, string memory _ipfshash) public onlyOwner returns (uint){
         _mint(_owner, id, 10**18, "");
         
         ipfsHashes[id] = _ipfshash;
@@ -86,11 +86,10 @@ contract stockenCapital is  ERC1155Burnable {
             creator: _owner,
             category:_category,
             info:_info,
-            titulo:_titulo,
             idUser:_idUser
         });
         activosByUser[_idUser].push(activos[id]);
-        emit newActivo(_owner,_idUser,_info,_titulo,_category, id);
+        emit newActivo(_owner,_idUser,_info,_category, id);
         id++;
         return(id-1);
     }
