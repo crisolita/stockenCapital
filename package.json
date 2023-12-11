@@ -9,8 +9,8 @@
     "precompile": "rm -r $(pwd)/client/src/utils/abi && mkdir $(pwd)/client/src/utils/abi",
     "compile": "hardhat compile",
     "postcompile": "mv $(pwd)/artifacts/contracts/*/*.json $(pwd)/client/src/utils/abi",
-    "testnet:deploy": "hardhat deploy --tags NFT1155 --network testnet",
-    "mainnet:deploy": "hardhat deploy --tags NFT1155 --network mainnet",
+    "testnet:deploy": "hardhat deploy --tags stockenCapital --network testnet",
+    "mainnet:deploy": "hardhat deploy --tags stockenCapital --network mainnet",
     "t:verify": "hardhat --network testnet etherscan-verify --sleep",
     "m:verify": "hardhat --network mainnet etherscan-verify --sleep"
   },
@@ -32,6 +32,7 @@
     "@chainlink/contracts": "^0.1.6",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@openzeppelin/contracts": "^4.8.1",
+    "@openzeppelin/contracts-upgradeable": "^4.9.3",
     "@openzeppelin/test-helpers": "^0.5.16",
     "@uniswap/v2-periphery": "^1.1.0-beta.0",
     "chai": "^4.3.4",

@@ -1,13 +1,25 @@
-const TOKEN_CONTRACT_NAME = "NFT1155";
+const CONTRACT_NAME = "stockenCapital";
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
-  const { deploy, log } = deployments;
-  const namedAccounts = await getNamedAccounts();
-  const { deployer } = namedAccounts;
-  const deployResult = await deploy("NFT1155", {
+  const { deploy } = deployments;
+  const { deployer } = await getNamedAccounts();
+
+  // Upgradeable Proxy
+  const deployResult = await deploy("stockenCapital", {
     from: deployer,
-    args: ["Loquesea"],
+    proxy: {
+      owner: deployer,
+      execute: {
+        init: {
+          methodName: "initialize",
+          args: [
+           "https;//"
+          ],
+        },
+      },
+    },
     log: true,
   });
+  console.log(deployResult.address);
 };
-module.exports.tags = [TOKEN_CONTRACT_NAME];
+module.exports.tags = [CONTRACT_NAME];
